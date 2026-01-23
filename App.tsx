@@ -125,11 +125,11 @@ const Hero = () => {
           <ShootingStar key={i} index={i} />
         ))}
 
-        {/* Mount Rainier Silhouette */}
-        <div 
+        {/* Hero Image */}
+        <div
           className="absolute bottom-0 left-0 w-full h-[65%] z-10 opacity-60 pointer-events-none"
           style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1542459742-19bc8923f95b?q=80&w=2574&auto=format&fit=crop')`,
+            backgroundImage: `url('/images/hero.jpg')`,
             backgroundSize: 'cover',
             backgroundPosition: 'center 85%',
             maskImage: 'linear-gradient(to top, black 30%, transparent 100%)',
@@ -231,13 +231,18 @@ const Founder = () => {
       <div className="absolute top-0 left-0 text-[12rem] font-industrial font-black text-white/5 leading-none select-none translate-y-[-20%] pointer-events-none uppercase">AUTHENTIC</div>
       
       <div className="max-w-4xl mx-auto px-6 relative z-10">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
           className="text-center md:text-left"
         >
+          <img
+            src="/images/Canva%20PFP.jpg"
+            alt="Julian Aguilar"
+            className="w-24 h-24 md:w-28 md:h-28 rounded-full border-2 border-blue-500 shadow-lg shadow-blue-500/50 mx-auto mb-8 object-cover"
+          />
           <h2 className="text-sm font-industrial text-blue-500 font-bold mb-4 tracking-[0.3em] uppercase">The Truth Behind The Boots</h2>
           <h3 className="text-5xl lg:text-7xl font-industrial font-black mb-8 leading-none uppercase">Julian Aguilar</h3>
           
