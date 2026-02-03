@@ -648,14 +648,12 @@ const Contact = () => {
       message: (form.elements.namedItem('message') as HTMLTextAreaElement).value,
     };
 
-    // Initialize EmailJS with your public key
-    (window as any).emailjs.init('IsLO_A2AshRujXIvJ');
-
-    // Send the email using emailjs.send
+    // Send the email using emailjs.send with public key as 4th argument
     (window as any).emailjs.send(
       'service_4juhdxr',
       'template_c5zd6yv',
-      formData
+      formData,
+      'lsLO_A2AshRuJXlvJ'
     )
     .then(() => {
       setFormStatus('success');
