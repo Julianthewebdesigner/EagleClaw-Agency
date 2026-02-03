@@ -60,7 +60,7 @@ const MacBookFrame: React.FC<MacBookFrameProps> = ({ screenshot, alt, isHovered 
             <img
               src={screenshot}
               alt={alt}
-              className="w-full h-full object-contain object-center"
+              className="w-full h-full object-cover object-top"
             />
           </div>
         </foreignObject>
@@ -137,7 +137,7 @@ const MacBookFrame: React.FC<MacBookFrameProps> = ({ screenshot, alt, isHovered 
             <rect x="120" y="50" width="1360" height="850" rx="12" fill="#18181b" />
             <foreignObject x="128" y="58" width="1344" height="834">
               <div className="w-full h-full">
-                <img src={screenshot} alt="" className="w-full h-full object-contain object-center" />
+                <img src={screenshot} alt="" className="w-full h-full object-cover object-top" />
               </div>
             </foreignObject>
           </svg>

@@ -47,10 +47,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
       onMouseEnter={() => !isTouchDevice && setIsHovered(true)}
       onMouseLeave={() => !isTouchDevice && setIsHovered(false)}
       onClick={handleTouch}
-      className="relative group cursor-pointer"
+      className="relative group cursor-pointer w-full"
       style={{
-        transformStyle: 'preserve-3d',
-        perspective: '1000px',
+        transformStyle: isTouchDevice ? 'flat' : 'preserve-3d',
+        perspective: isTouchDevice ? 'none' : '1000px',
       }}
     >
       {/* Cursor Glow - Desktop Only */}
