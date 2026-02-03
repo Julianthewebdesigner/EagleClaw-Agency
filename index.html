@@ -3,10 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EagleClaw Design Agency | Seattle Web Design for Contractors</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Primary Meta Tags -->
+    <title>EagleClaw Design Agency | Premium Web Design & SEO for Seattle Contractors</title>
+    <meta name="title" content="EagleClaw Design Agency | Premium Web Design & SEO for Seattle Contractors">
+    <meta name="description" content="Seattle's elite web design and digital marketing agency for contractors, landscapers, and service businesses. Custom websites, local SEO, and automation that generate high-ticket leads 24/7. Serving Seattle, Bellevue, Tacoma, and the Pacific Northwest.">
+    <meta name="keywords" content="Seattle web design, contractor websites, landscaping web design, local SEO Seattle, web design agency Seattle, contractor marketing, service business websites, Pacific Northwest web design, Bellevue web design, Tacoma web design, digital marketing Seattle, custom websites Seattle">
+    <meta name="author" content="EagleClaw Design Agency - WebprismX">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="7 days">
+
+    <!-- Geo Tags for Local SEO -->
+    <meta name="geo.region" content="US-WA">
+    <meta name="geo.placename" content="Seattle">
+    <meta name="geo.position" content="47.6062;-122.3321">
+    <meta name="ICBM" content="47.6062, -122.3321">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://eagleclawdesign.com/">
+    <meta property="og:title" content="EagleClaw Design Agency | Premium Web Design for Seattle Contractors">
+    <meta property="og:description" content="Seattle's elite web design and digital marketing agency for contractors. Custom websites, local SEO, and automation that generate high-ticket leads 24/7.">
+    <meta property="og:image" content="https://eagleclawdesign.com/images/Eagleclaw.PNG">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="EagleClaw Design Agency">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://eagleclawdesign.com/">
+    <meta property="twitter:title" content="EagleClaw Design Agency | Premium Web Design for Seattle Contractors">
+    <meta property="twitter:description" content="Seattle's elite web design and digital marketing agency for contractors. Custom websites, local SEO, and automation that generate high-ticket leads 24/7.">
+    <meta property="twitter:image" content="https://eagleclawdesign.com/images/Eagleclaw.PNG">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/images/Eagleclaw.PNG">
+    <link rel="apple-touch-icon" href="/images/Eagleclaw.PNG">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://eagleclawdesign.com/">
+
+    <!-- Schema.org Structured Data for Local Business -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "EagleClaw Design Agency",
+      "image": "https://eagleclawdesign.com/images/Eagleclaw.PNG",
+      "description": "Premium web design, SEO, and digital marketing agency specializing in contractor and service business websites in Seattle and the Pacific Northwest.",
+      "url": "https://eagleclawdesign.com",
+      "telephone": "+1-206-418-8749",
+      "email": "webprismx@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Seattle",
+        "addressRegion": "WA",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "47.6062",
+        "longitude": "-122.3321"
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Seattle"
+        },
+        {
+          "@type": "City",
+          "name": "Bellevue"
+        },
+        {
+          "@type": "City",
+          "name": "Tacoma"
+        },
+        {
+          "@type": "City",
+          "name": "Everett"
+        },
+        {
+          "@type": "City",
+          "name": "Renton"
+        },
+        {
+          "@type": "City",
+          "name": "Kent"
+        },
+        {
+          "@type": "State",
+          "name": "Washington"
+        }
+      ],
+      "priceRange": "$$$$",
+      "founder": {
+        "@type": "Person",
+        "name": "Julian Aguilar",
+        "jobTitle": "Founder & Lead Developer"
+      },
+      "serviceType": [
+        "Web Design",
+        "SEO Services",
+        "Digital Marketing",
+        "Website Development",
+        "Local SEO",
+        "Marketing Automation",
+        "AI Chatbot Development"
+      ],
+      "sameAs": [
+        "https://eagleclawdesign.com"
+      ]
+    }
+    </script>
+    <!-- Performance Optimization -->
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://esm.sh">
+
+    <!-- DNS Prefetch for external resources -->
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://esm.sh">
+
+    <!-- Preload critical assets -->
+    <link rel="preload" href="/images/Eagleclaw.PNG" as="image">
+
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Oswald:wght@700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -37,6 +162,35 @@
         }
         .animate-sweep {
             animation: sweep 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        /* MacBook Scan Line Animation */
+        @keyframes scan {
+            0% {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(200%);
+                opacity: 0;
+            }
+        }
+
+        /* Reduced Motion Support */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
         }
 
         /* Custom selection color */

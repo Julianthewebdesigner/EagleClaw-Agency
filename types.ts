@@ -16,3 +16,14 @@ export interface FAQItem {
   question: string;
   answer: string;
 }
+
+export interface Project {
+  id: string;
+  title: string;
+  client: string;
+  description: string;
+  results: string[];
+  screenshot: string;
+  category: string;
+  year: string;
+}

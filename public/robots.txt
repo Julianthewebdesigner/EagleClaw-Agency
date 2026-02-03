@@ -1,0 +1,11 @@
+# robots.txt for EagleClaw Design Agency
+# Seattle Web Design & Digital Marketing
+
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://eagleclawdesign.com/sitemap.xml
+
+# Crawl-delay (optional, helps with server load)
+Crawl-delay: 1
