@@ -640,18 +640,26 @@ const Contact = () => {
     e.preventDefault();
     setFormStatus('sending');
 
-    // Initialize EmailJS with your public key
-    (window as any).emailjs.init('xKJx_j9yxJ-fwR8Ds');
+    const form = e.currentTarget;
+    const formData = {
+      from_name: (form.elements.namedItem('from_name') as HTMLInputElement).value,
+      business_name: (form.elements.namedItem('business_name') as HTMLInputElement).value,
+      from_email: (form.elements.namedItem('from_email') as HTMLInputElement).value,
+      message: (form.elements.namedItem('message') as HTMLTextAreaElement).value,
+    };
 
-    // Send the email using your service and template IDs
-    (window as any).emailjs.sendForm(
+    // Initialize EmailJS with your public key
+    (window as any).emailjs.init('IsLO_A2AshRujXIvJ');
+
+    // Send the email using emailjs.send
+    (window as any).emailjs.send(
       'service_4juhdxr',
       'template_c5zd6yv',
-      e.currentTarget
+      formData
     )
     .then(() => {
       setFormStatus('success');
-      (e.target as HTMLFormElement).reset();
+      form.reset();
       setTimeout(() => setFormStatus('idle'), 5000);
     })
     .catch((error: any) => {
