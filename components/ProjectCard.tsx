@@ -18,8 +18,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
   const isTouchDevice = 'ontouchstart' in window;
   const isOverlayVisible = isTouchDevice ? isTouched : isHovered;
 
+  // Simpler animations for touch devices to avoid Safari issues
   const macbookVariants = {
-    hidden: { opacity: 0, y: 60, rotateX: 15 },
+    hidden: { opacity: 0, y: isTouchDevice ? 30 : 60, rotateX: isTouchDevice ? 0 : 15 },
     visible: {
       opacity: 1,
       y: 0,
@@ -47,10 +48,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
       onMouseEnter={() => !isTouchDevice && setIsHovered(true)}
       onMouseLeave={() => !isTouchDevice && setIsHovered(false)}
       onClick={handleTouch}
-      className="relative group cursor-pointer w-full"
+      className="relative group cursor-pointer w-full max-w-full"
       style={{
-        transformStyle: isTouchDevice ? 'flat' : 'preserve-3d',
-        perspective: isTouchDevice ? 'none' : '1000px',
+        transformStyle: 'flat',
+        perspective: 'none',
+        contain: 'layout',
       }}
     >
       {/* Cursor Glow - Desktop Only */}
@@ -59,14 +61,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
       {/* MacBook Container */}
       <motion.div
         animate={{
-          scale: isHovered ? 1.02 : 1,
-          y: isHovered ? -8 : 0,
+          scale: isHovered && !isTouchDevice ? 1.02 : 1,
+          y: isHovered && !isTouchDevice ? -8 : 0,
         }}
         transition={{
           duration: 0.5,
           ease: 'easeOut',
         }}
-        className="relative"
+        className="relative w-full max-w-full overflow-hidden"
       >
         <MacBookFrame
           screenshot={project.screenshot}

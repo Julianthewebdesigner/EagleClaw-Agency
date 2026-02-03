@@ -9,12 +9,76 @@
     transform: none !important;
     perspective: none !important;
   }
+
+  /* Disable 3D transforms on mobile */
+  * {
+    transform-style: flat !important;
+    -webkit-transform-style: flat !important;
+  }
+
+  /* Force GPU acceleration for smoother animations */
+  .motion-div,
+  [class*="motion-"] {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-perspective: 1000;
+    perspective: 1000;
+  }
 }
 
-/* Prevent horizontal overflow */
+/* Prevent horizontal overflow - use 100% instead of 100vw for iOS Safari */
 body, html {
-  max-width: 100vw;
+  max-width: 100%;
   overflow-x: hidden;
+}
+
+/* Ensure no element uses 100vw */
+* {
+  max-width: 100%;
+}
+
+/* Allow specific elements to use full width */
+.grid,
+.w-full,
+[class*="w-full"] {
+  max-width: none;
+}
+
+/* Responsive image and media protection */
+img,
+video,
+iframe,
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Ensure SVG foreignObject content is responsive */
+foreignObject {
+  width: 100%;
+  height: 100%;
+}
+
+foreignObject img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Safari-specific fixes */
+@supports (-webkit-touch-callout: none) {
+  /* iOS Safari */
+  body {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Prevent rubber-band horizontal scroll */
+  html,
+  body {
+    overflow-x: hidden;
+    position: relative;
+    width: 100%;
+  }
 }
 
 /* MacBook scan animation */

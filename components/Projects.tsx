@@ -43,7 +43,9 @@ const ShootingStar: React.FC<{ index: number }> = ({ index }) => {
 
 const Projects: React.FC = () => {
   const { scrollYProgress } = useScroll();
-  const y = useTransform(scrollYProgress, [0, 1], [0, -50]);
+  // Disable parallax on touch devices for better iOS Safari performance
+  const isTouchDevice = typeof window !== 'undefined' && 'ontouchstart' in window;
+  const y = useTransform(scrollYProgress, [0, 1], isTouchDevice ? [0, 0] : [0, -50]);
 
   const projects: Project[] = [
     {
@@ -117,19 +119,29 @@ const Projects: React.FC = () => {
           <ShootingStar key={i} index={i} />
         ))}
 
-        {/* 3D Perspective Grid */}
+        {/* 3D Perspective Grid - Desktop Only, flat on mobile for Safari compatibility */}
         <div
-          className="absolute inset-0 opacity-5"
+          className="absolute inset-0 opacity-5 hidden md:block"
           style={{
             backgroundImage: `
               linear-gradient(to right, rgba(59, 130, 246, 0.5) 1px, transparent 1px),
               linear-gradient(to bottom, rgba(59, 130, 246, 0.5) 1px, transparent 1px)
             `,
             backgroundSize: '80px 80px',
-            transform: 'perspective(1000px) rotateX(60deg) scale(2)',
-            transformOrigin: 'center center',
             maskImage: 'radial-gradient(circle, black 30%, transparent 70%)',
             WebkitMaskImage: 'radial-gradient(circle, black 30%, transparent 70%)',
+          }}
+        />
+
+        {/* Simple grid for mobile/Safari */}
+        <div
+          className="absolute inset-0 opacity-5 md:hidden"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, rgba(59, 130, 246, 0.5) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(59, 130, 246, 0.5) 1px, transparent 1px)
+            `,
+            backgroundSize: '80px 80px',
           }}
         />
 
@@ -173,7 +185,8 @@ const Projects: React.FC = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-8 lg:gap-12"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-8 lg:gap-12 w-full max-w-full"
+          style={{ overflow: 'hidden' }}
         >
           {projects.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} />

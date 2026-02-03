@@ -8,17 +8,22 @@ interface MacBookFrameProps {
 
 const MacBookFrame: React.FC<MacBookFrameProps> = ({ screenshot, alt, isHovered = false }) => {
   return (
-    <div className="relative w-full">
-      {/* MacBook SVG Container */}
-      <svg
-        viewBox="0 0 1600 1000"
-        className="w-full h-auto transition-all duration-500"
-        style={{
-          filter: isHovered
-            ? 'drop-shadow(0 20px 60px rgba(0,0,0,0.6)) drop-shadow(0 0 40px rgba(59,130,246,0.15))'
-            : 'drop-shadow(0 50px 100px rgba(0,0,0,0.5)) drop-shadow(0 10px 25px rgba(0,0,0,0.8)) drop-shadow(0 0 40px rgba(59,130,246,0.15))',
-        }}
-      >
+    <div className="relative w-full max-w-full" style={{ aspectRatio: '16/10' }}>
+      {/* Responsive wrapper with aspect ratio */}
+      <div className="relative w-full h-full">
+        {/* MacBook SVG Container */}
+        <svg
+          viewBox="0 0 1600 1000"
+          className="w-full h-full transition-all duration-500"
+          preserveAspectRatio="xMidYMid meet"
+          style={{
+            maxWidth: '100%',
+            height: 'auto',
+            filter: isHovered
+              ? 'drop-shadow(0 20px 60px rgba(0,0,0,0.6)) drop-shadow(0 0 40px rgba(59,130,246,0.15))'
+              : 'drop-shadow(0 50px 100px rgba(0,0,0,0.5)) drop-shadow(0 10px 25px rgba(0,0,0,0.8)) drop-shadow(0 0 40px rgba(59,130,246,0.15))',
+          }}
+        >
         {/* Keyboard Deck */}
         <defs>
           <linearGradient id={`keyboard-gradient-${isHovered ? 'hover' : 'normal'}`} x1="0%" y1="0%" x2="0%" y2="100%">
@@ -122,15 +127,18 @@ const MacBookFrame: React.FC<MacBookFrameProps> = ({ screenshot, alt, isHovered 
           fill="rgba(0,0,0,0.3)"
         />
       </svg>
+      </div>
 
       {/* Reflection Pool - Desktop Only */}
-      <div className="hidden lg:block absolute top-full left-0 w-full h-32 overflow-hidden pointer-events-none">
+      {/* Reflection Pool - Desktop Only, disabled on Safari for performance */}
+      <div className="hidden xl:block absolute top-full left-0 w-full max-w-full h-32 overflow-hidden pointer-events-none">
         <div
           className="absolute top-0 left-0 w-full opacity-15 blur-[8px]"
           style={{
             transform: 'scaleY(-1) translateY(20px)',
             maskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, transparent 100%)',
             WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, transparent 100%)',
+            willChange: 'auto',
           }}
         >
           <svg viewBox="0 0 1600 1000" className="w-full h-auto">
@@ -144,12 +152,13 @@ const MacBookFrame: React.FC<MacBookFrameProps> = ({ screenshot, alt, isHovered 
         </div>
       </div>
 
-      {/* Scan Line Effect */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-lg">
+      {/* Scan Line Effect - Desktop Only */}
+      <div className="hidden md:block absolute inset-0 overflow-hidden pointer-events-none rounded-lg">
         <div
-          className="absolute left-0 w-full h-[40%] bg-gradient-to-b from-blue-500/[0.03] to-transparent animate-scan"
+          className="absolute left-0 w-full h-[40%] bg-gradient-to-b from-blue-500/[0.03] to-transparent"
           style={{
             animation: 'scan 8s ease-in-out infinite',
+            willChange: 'auto',
           }}
         />
       </div>
