@@ -14,7 +14,7 @@ const MacBookFrame: React.FC<MacBookFrameProps> = ({ screenshot, alt, isHovered 
         {/* MacBook SVG Container */}
         <svg
           viewBox="0 0 1600 1000"
-          className="w-full h-full transition-all duration-500"
+          className="block w-full h-full transition-all duration-500"
           preserveAspectRatio="xMidYMid meet"
           style={{
             maxWidth: '100%',
@@ -24,7 +24,7 @@ const MacBookFrame: React.FC<MacBookFrameProps> = ({ screenshot, alt, isHovered 
               : 'drop-shadow(0 50px 100px rgba(0,0,0,0.5)) drop-shadow(0 10px 25px rgba(0,0,0,0.8)) drop-shadow(0 0 40px rgba(59,130,246,0.15))',
           }}
         >
-        {/* Keyboard Deck */}
+        {/* Definitions */}
         <defs>
           <linearGradient id={`keyboard-gradient-${isHovered ? 'hover' : 'normal'}`} x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stopColor={isHovered ? '#1e3a8a' : '#18181b'} />
@@ -35,6 +35,22 @@ const MacBookFrame: React.FC<MacBookFrameProps> = ({ screenshot, alt, isHovered 
             <stop offset="40%" stopColor="rgba(255,255,255,0.02)" />
             <stop offset="100%" stopColor="rgba(0,0,0,0.1)" />
           </linearGradient>
+          <clipPath id="screen-clip">
+            <rect x="128" y="58" width="1344" height="834" rx="8" />
+          </clipPath>
+          <filter id={`brightness-filter-${isHovered ? 'hover' : 'normal'}`}>
+            <feColorMatrix
+              type="matrix"
+              values={isHovered
+                ? "1.15 0 0 0 0  0 1.15 0 0 0  0 0 1.15 0 0  0 0 0 1 0"
+                : "1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"
+              }
+            />
+            <feColorMatrix
+              type="saturate"
+              values={isHovered ? "1.1" : "1"}
+            />
+          </filter>
         </defs>
 
         {/* Screen Bezel */}
@@ -50,25 +66,17 @@ const MacBookFrame: React.FC<MacBookFrameProps> = ({ screenshot, alt, isHovered 
         />
 
         {/* Screen Content Area */}
-        <foreignObject x="128" y="58" width="1344" height="834" clipPath="url(#screen-clip)">
-          <defs>
-            <clipPath id="screen-clip">
-              <rect x="0" y="0" width="1344" height="834" rx="8" />
-            </clipPath>
-          </defs>
-          <div
-            className="w-full h-full bg-black transition-all duration-400"
-            style={{
-              filter: isHovered ? 'brightness(1.15) saturate(1.1)' : 'brightness(1)',
-            }}
-          >
-            <img
-              src={screenshot}
-              alt={alt}
-              className="w-full h-full object-cover object-top"
-            />
-          </div>
-        </foreignObject>
+        <image
+          href={screenshot}
+          x="128"
+          y="58"
+          width="1344"
+          height="834"
+          preserveAspectRatio="xMidYMin slice"
+          clipPath="url(#screen-clip)"
+          filter={`url(#brightness-filter-${isHovered ? 'hover' : 'normal'})`}
+          className="transition-all duration-400"
+        />
 
         {/* Screen Glass Effect */}
         <rect
@@ -141,13 +149,22 @@ const MacBookFrame: React.FC<MacBookFrameProps> = ({ screenshot, alt, isHovered 
             willChange: 'auto',
           }}
         >
-          <svg viewBox="0 0 1600 1000" className="w-full h-auto">
+          <svg viewBox="0 0 1600 1000" className="block w-full h-auto" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <clipPath id="screen-clip-reflection">
+                <rect x="128" y="58" width="1344" height="834" rx="8" />
+              </clipPath>
+            </defs>
             <rect x="120" y="50" width="1360" height="850" rx="12" fill="#18181b" />
-            <foreignObject x="128" y="58" width="1344" height="834">
-              <div className="w-full h-full">
-                <img src={screenshot} alt="" className="w-full h-full object-cover object-top" />
-              </div>
-            </foreignObject>
+            <image
+              href={screenshot}
+              x="128"
+              y="58"
+              width="1344"
+              height="834"
+              preserveAspectRatio="xMidYMin slice"
+              clipPath="url(#screen-clip-reflection)"
+            />
           </svg>
         </div>
       </div>
