@@ -634,6 +634,33 @@ const FAQ = () => {
 };
 
 const Contact = () => {
+  const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setFormStatus('sending');
+
+    // Initialize EmailJS with your public key
+    (window as any).emailjs.init('xKJx_j9yxJ-fwR8Ds');
+
+    // Send the email using your service and template IDs
+    (window as any).emailjs.sendForm(
+      'service_4juhdxr',
+      'template_c5zd6yv',
+      e.currentTarget
+    )
+    .then(() => {
+      setFormStatus('success');
+      (e.target as HTMLFormElement).reset();
+      setTimeout(() => setFormStatus('idle'), 5000);
+    })
+    .catch((error: any) => {
+      console.error('EmailJS error:', error);
+      setFormStatus('error');
+      setTimeout(() => setFormStatus('idle'), 5000);
+    });
+  };
+
   return (
     <section id="contact" className="py-32 bg-zinc-950 border-t border-zinc-900 scroll-mt-24 relative overflow-hidden">
       {/* Premium background effects */}
@@ -712,26 +739,45 @@ const Contact = () => {
             {/* Premium glow effect */}
             <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-transparent rounded-2xl opacity-0 hover:opacity-100 transition-opacity duration-500"></div>
 
-             <form className="space-y-6 relative z-10" action="mailto:webprismx@gmail.com" method="post" encType="text/plain">
+             <form id="contact-form" className="space-y-6 relative z-10" onSubmit={handleSubmit}>
                <div className="grid grid-cols-2 gap-4">
                  <div className="space-y-2">
                    <label className="text-xs uppercase text-zinc-500 font-bold">Your Name</label>
-                   <input required type="text" name="name" className="w-full bg-black border border-zinc-800 p-4 rounded outline-none focus:border-blue-500 focus:shadow-[0_0_15px_rgba(59,130,246,0.3)] transition-all text-white" />
+                   <input required type="text" name="from_name" className="w-full bg-black border border-zinc-800 p-4 rounded outline-none focus:border-blue-500 focus:shadow-[0_0_15px_rgba(59,130,246,0.3)] transition-all text-white" />
                  </div>
                  <div className="space-y-2">
                    <label className="text-xs uppercase text-zinc-500 font-bold">Business Name</label>
-                   <input required type="text" name="business" className="w-full bg-black border border-zinc-800 p-4 rounded outline-none focus:border-blue-500 focus:shadow-[0_0_15px_rgba(59,130,246,0.3)] transition-all text-white" />
+                   <input required type="text" name="business_name" className="w-full bg-black border border-zinc-800 p-4 rounded outline-none focus:border-blue-500 focus:shadow-[0_0_15px_rgba(59,130,246,0.3)] transition-all text-white" />
                  </div>
                </div>
                <div className="space-y-2">
                  <label className="text-xs uppercase text-zinc-500 font-bold">Email Address</label>
-                 <input required type="email" name="email" className="w-full bg-black border border-zinc-800 p-4 rounded outline-none focus:border-blue-500 focus:shadow-[0_0_15px_rgba(59,130,246,0.3)] transition-all text-white" />
+                 <input required type="email" name="from_email" className="w-full bg-black border border-zinc-800 p-4 rounded outline-none focus:border-blue-500 focus:shadow-[0_0_15px_rgba(59,130,246,0.3)] transition-all text-white" />
                </div>
                <div className="space-y-2">
                  <label className="text-xs uppercase text-zinc-500 font-bold">Message / Project Goal</label>
                  <textarea required name="message" rows={4} className="w-full bg-black border border-zinc-800 p-4 rounded outline-none focus:border-blue-500 focus:shadow-[0_0_15px_rgba(59,130,246,0.3)] transition-all text-white resize-none"></textarea>
                </div>
-               <GlowButton className="w-full py-5">SEND PROJECT INQUIRY <ArrowRight size={20} /></GlowButton>
+
+               {formStatus === 'success' && (
+                 <div className="p-4 bg-green-900/30 border border-green-500/50 rounded text-green-400 text-center font-industrial">
+                   Message sent successfully! We'll be in touch soon.
+                 </div>
+               )}
+
+               {formStatus === 'error' && (
+                 <div className="p-4 bg-red-900/30 border border-red-500/50 rounded text-red-400 text-center font-industrial">
+                   Failed to send message. Please try again or call us directly.
+                 </div>
+               )}
+
+               <GlowButton
+                 type="submit"
+                 className="w-full py-5"
+                 disabled={formStatus === 'sending'}
+               >
+                 {formStatus === 'sending' ? 'SENDING...' : 'SEND PROJECT INQUIRY'} <ArrowRight size={20} />
+               </GlowButton>
              </form>
           </motion.div>
         </div>
